@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 	<TribalSignal_CommandLabel>Позвать племенных торговцев</TribalSignal_CommandLabel>
-	<TribalSignal_CommandDesc>Поднять дымовой сигнал. Случайная не враждебная неолитовая фракция с караванами получит зов; караван придёт не сразу, а через некоторое время. После вызова действует перезарядка.</TribalSignal_CommandDesc>
+	<TribalSignal_CommandDesc>Поднять дымовой сигнал. Случайная не враждебная неолитовая фракция с караванами получит зов; караван придёт не сразу, а через некоторое время. Требуется {0} серебра. После вызова действует перезарядка.</TribalSignal_CommandDesc>
 	<TribalSignal_OnCooldown>Перезарядка: {0}</TribalSignal_OnCooldown>
 	<TribalSignal_NoFaction>Нет подходящей племенной фракции (Neolithic, не враг, есть торговцы, температура).</TribalSignal_NoFaction>
+	<TribalSignal_Burning>Сигнальный костёр горит. Караван прибудет через {0}.</TribalSignal_Burning>
+	<TribalSignal_BurnedOut>Сигнальный костёр догорел.</TribalSignal_BurnedOut>
+	<TribalSignal_ConfirmPayment>При вызове каравана придётся дополнительно заплатить караванщику по прибытию {0} серебра. Давайте отложим эту сумму заранее?</TribalSignal_ConfirmPayment>
+	<TribalSignal_NotEnoughSilver>Недостаточно серебра. Нужно {0}, есть {1}.</TribalSignal_NotEnoughSilver>
 	<TribalSignal_Failed>Сигнал не сработал — караван не прибыл (условия или случайность).</TribalSignal_Failed>
 	<TribalSignal_Scheduled>Сигнал отправлен фракции «{0}». Торговый караван ожидается примерно через {1} дн.</TribalSignal_Scheduled>
 	<TribalSignal_CooldownShared>Общая перезарядка: все сигнальные костры разделяют один таймер.</TribalSignal_CooldownShared>

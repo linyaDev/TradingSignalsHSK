@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace TribalSignalCampfire;
@@ -20,6 +21,11 @@ public class CompTribalSignalFire : ThingComp
 	/// <summary>Delay before the caravan incident fires (2 days).</summary>
 	private const int ArrivalDelayTicks = 120000;
 
+	private bool isBurning;
+	private int arrivalTick = -1;
+
+	public bool IsBurning => isBurning;
+
 	private CompProperties_TribalSignalFire Props => (CompProperties_TribalSignalFire)props;
 
 	/// <summary>
@@ -29,6 +35,47 @@ public class CompTribalSignalFire : ThingComp
 	private static WorldComponent_TribalSignalCooldown? Tracker =>
 		Find.World?.GetComponent<WorldComponent_TribalSignalCooldown>();
 
+	public override void PostExposeData()
+	{
+		base.PostExposeData();
+		Scribe_Values.Look(ref isBurning, "isBurning");
+		Scribe_Values.Look(ref arrivalTick, "arrivalTick", -1);
+	}
+
+	public override void CompTick()
+	{
+		base.CompTick();
+		if (!isBurning || parent.Map == null)
+		{
+			return;
+		}
+
+		Vector3 pos = parent.DrawPos;
+		Map map = parent.Map;
+
+		if (parent.IsHashIntervalTick(15))
+		{
+			FleckMaker.ThrowFireGlow(pos, map, 1.5f);
+		}
+
+		if (parent.IsHashIntervalTick(30))
+		{
+			FleckMaker.ThrowSmoke(pos + new Vector3(0f, 0f, 0.5f), map, 2f);
+		}
+
+		if (parent.IsHashIntervalTick(50))
+		{
+			FleckMaker.ThrowMicroSparks(pos, map);
+		}
+
+		if (arrivalTick > 0 && Find.TickManager.TicksGame >= arrivalTick)
+		{
+			isBurning = false;
+			Messages.Message("TribalSignal_BurnedOut".Translate(), MessageTypeDefOf.NeutralEvent);
+			parent.Destroy(DestroyMode.Vanish);
+		}
+	}
+
 	public override IEnumerable<Gizmo> CompGetGizmosExtra()
 	{
 		if (parent is not Building || !parent.Spawned || parent.Map == null)
@@ -36,10 +83,15 @@ public class CompTribalSignalFire : ThingComp
 			yield break;
 		}
 
+		if (isBurning)
+		{
+			yield break;
+		}
+
 		var cmd = new Command_Action
 		{
 			defaultLabel = "TribalSignal_CommandLabel".Translate(),
-			defaultDesc = "TribalSignal_CommandDesc".Translate(),
+			defaultDesc = "TribalSignal_CommandDesc".Translate(SilverCost),
 			icon = parent.def.uiIcon,
 			action = TryCallTribalTrader
 		};
@@ -58,9 +110,18 @@ public class CompTribalSignalFire : ThingComp
 
 	public override string CompInspectStringExtra()
 	{
-		if (!CooldownComplete(out int ticksLeft))
+		if (isBurning && arrivalTick > 0)
 		{
-			return "TribalSignal_OnCooldown".Translate(ticksLeft.ToStringTicksToPeriod());
+			int ticksLeft = arrivalTick - Find.TickManager.TicksGame;
+			if (ticksLeft > 0)
+			{
+				return "TribalSignal_Burning".Translate(ticksLeft.ToStringTicksToPeriod());
+			}
+		}
+
+		if (!CooldownComplete(out int cooldownLeft))
+		{
+			return "TribalSignal_OnCooldown".Translate(cooldownLeft.ToStringTicksToPeriod());
 		}
 
 		return "TribalSignal_CooldownShared".Translate();
@@ -77,6 +138,8 @@ public class CompTribalSignalFire : ThingComp
 
 		return tracker.CooldownComplete(Props.cooldownTicks, out ticksLeft);
 	}
+
+	private const int SilverCost = 200;
 
 	private void TryCallTribalTrader()
 	{
@@ -98,6 +161,26 @@ public class CompTribalSignalFire : ThingComp
 			return;
 		}
 
+		int silverAvailable = CountSilverOnMap(map);
+		if (silverAvailable < SilverCost)
+		{
+			Messages.Message("TribalSignal_NotEnoughSilver".Translate(SilverCost, silverAvailable), MessageTypeDefOf.RejectInput);
+			return;
+		}
+
+		Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
+			"TribalSignal_ConfirmPayment".Translate(SilverCost),
+			delegate { ExecuteSignal(map, candidates); }));
+	}
+
+	private void ExecuteSignal(Map map, List<Faction> candidates)
+	{
+		if (!TakesilverFromMap(map, SilverCost))
+		{
+			Messages.Message("TribalSignal_NotEnoughSilver".Translate(SilverCost, CountSilverOnMap(map)), MessageTypeDefOf.RejectInput);
+			return;
+		}
+
 		Faction faction = candidates.RandomElement();
 		IncidentParms parms = new IncidentParms
 		{
@@ -115,12 +198,40 @@ public class CompTribalSignalFire : ThingComp
 
 		int fireTick = Find.TickManager.TicksGame + ArrivalDelayTicks;
 		Find.Storyteller.incidentQueue.Add(incident, fireTick, parms);
+
+		isBurning = true;
+		arrivalTick = fireTick;
+
 		string delayDaysStr = ((float)ArrivalDelayTicks / GenDate.TicksPerDay).ToString("F1");
 		Messages.Message(
 			"TribalSignal_Scheduled".Translate(faction.Name, delayDaysStr),
 			MessageTypeDefOf.PositiveEvent);
 
 		Tracker?.NotifySignalUsed();
+	}
+
+	private static int CountSilverOnMap(Map map)
+	{
+		int total = 0;
+		foreach (Thing t in map.listerThings.ThingsOfDef(ThingDefOf.Silver))
+		{
+			total += t.stackCount;
+		}
+		return total;
+	}
+
+	private static bool TakesilverFromMap(Map map, int amount)
+	{
+		int remaining = amount;
+		List<Thing> silvers = map.listerThings.ThingsOfDef(ThingDefOf.Silver).ToList();
+		foreach (Thing silver in silvers)
+		{
+			if (remaining <= 0) break;
+			int take = Mathf.Min(silver.stackCount, remaining);
+			silver.SplitOff(take).Destroy();
+			remaining -= take;
+		}
+		return remaining <= 0;
 	}
 
 	private static bool AnyNeolithicTradeFaction(Map map)

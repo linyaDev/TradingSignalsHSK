@@ -4,7 +4,7 @@
 	<TradeSignal_OnCooldown>Перезарядка: {0}</TradeSignal_OnCooldown>
 	<TradeSignal_ConfirmPayment>При вызове каравана придётся дополнительно заплатить караванщику по прибытию {0} серебра. Давайте отложим эту сумму заранее?</TradeSignal_ConfirmPayment>
 	<TradeSignal_NotEnoughSilver>Недостаточно серебра. Нужно {0}, есть {1}.</TradeSignal_NotEnoughSilver>
-	<TradeSignal_CooldownShared>Общая перезарядка: все постройки этого типа разделяют один таймер.</TradeSignal_CooldownShared>
+	<TradeSignal_CooldownShared>Готов к использованию.</TradeSignal_CooldownShared>
 
 	<!-- Сигнальный костёр (племенной) -->
 	<TribalSignal_CommandLabel>Позвать племенных торговцев</TribalSignal_CommandLabel>

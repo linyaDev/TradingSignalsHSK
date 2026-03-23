@@ -3,6 +3,7 @@ using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace TradingSignalsHSK;
 
@@ -12,7 +13,11 @@ public class CompProperties_TradeSignal : CompProperties
 	public int silverCost = 200;
 	public int arrivalDelayTicks = 120000;
 	public TechLevel targetTechLevel = TechLevel.Neolithic;
+	public TechLevel fallbackTechLevel = TechLevel.Undefined;
 	public bool destroyOnUse = true;
+	public bool spawnBirdsOnUse;
+	public int birdCount = 2;
+	public string birdKindDef = "Crow";
 	public string cooldownKey = "tribal";
 
 	// Localization keys
@@ -149,7 +154,7 @@ public class CompTradeSignal : ThingComp
 			return true;
 		}
 
-		return tracker.CooldownComplete(Props.cooldownKey, Props.cooldownTicks, out ticksLeft);
+		return tracker.CooldownComplete(Props.cooldownKey, out ticksLeft);
 	}
 
 	private void TryCallTrader()
@@ -211,7 +216,45 @@ public class CompTradeSignal : ThingComp
 			Props.scheduledKey.Translate(faction.Name, delayDaysStr),
 			MessageTypeDefOf.PositiveEvent);
 
-		Tracker?.NotifySignalUsed(Props.cooldownKey);
+		Tracker?.NotifySignalUsed(Props.cooldownKey, Props.cooldownTicks);
+
+		if (Props.spawnBirdsOnUse)
+		{
+			SpawnBirds(map);
+		}
+	}
+
+	private void SpawnBirds(Map map)
+	{
+		PawnKindDef birdKind = DefDatabase<PawnKindDef>.GetNamedSilentFail(Props.birdKindDef);
+		if (birdKind == null)
+		{
+			Log.Warning($"TradingSignalsHSK: PawnKindDef '{Props.birdKindDef}' not found.");
+			return;
+		}
+
+		List<Pawn> birds = new List<Pawn>();
+		for (int i = 0; i < Props.birdCount; i++)
+		{
+			Pawn bird = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
+				birdKind,
+				faction: null,
+				context: PawnGenerationContext.NonPlayer,
+				forceGenerateNewPawn: true));
+
+			IntVec3 spawnCell = parent.Position + new IntVec3(Rand.Range(-1, 2), 0, Rand.Range(-1, 2));
+			if (!spawnCell.InBounds(map) || !spawnCell.Standable(map))
+				spawnCell = parent.Position;
+
+			GenSpawn.Spawn(bird, spawnCell, map);
+			birds.Add(bird);
+		}
+
+		if (birds.Count > 0)
+		{
+			LordJob_ExitMapBest lordJob = new LordJob_ExitMapBest();
+			LordMaker.MakeNewLord(null, lordJob, map, birds);
+		}
 	}
 
 	private static int CountSilverOnMap(Map map)
@@ -243,18 +286,30 @@ public class CompTradeSignal : ThingComp
 		return FindValidTradeFactions(map).Any();
 	}
 
-	private IEnumerable<Faction> FindValidTradeFactions(Map map)
+	private List<Faction> FindValidTradeFactions(Map map)
 	{
-		foreach (Faction f in Find.FactionManager.AllFactions)
-		{
-			if (IsValidTradeSource(f, map))
-			{
-				yield return f;
-			}
-		}
+		List<Faction> primary = FindFactionsOfTechLevel(map, Props.targetTechLevel);
+		if (primary.Count > 0)
+			return primary;
+
+		if (Props.fallbackTechLevel != TechLevel.Undefined)
+			return FindFactionsOfTechLevel(map, Props.fallbackTechLevel);
+
+		return primary;
 	}
 
-	private bool IsValidTradeSource(Faction f, Map map)
+	private static List<Faction> FindFactionsOfTechLevel(Map map, TechLevel techLevel)
+	{
+		List<Faction> result = new List<Faction>();
+		foreach (Faction f in Find.FactionManager.AllFactions)
+		{
+			if (IsValidTradeSource(f, map, techLevel))
+				result.Add(f);
+		}
+		return result;
+	}
+
+	private static bool IsValidTradeSource(Faction f, Map map, TechLevel techLevel)
 	{
 		if (f.IsPlayer || f.defeated)
 			return false;
@@ -262,7 +317,7 @@ public class CompTradeSignal : ThingComp
 		if (f.def.hidden)
 			return false;
 
-		if (f.def.techLevel != Props.targetTechLevel)
+		if (f.def.techLevel != techLevel)
 			return false;
 
 		if (f.def.caravanTraderKinds.NullOrEmpty())

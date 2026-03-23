@@ -6,11 +6,13 @@ namespace TradingSignalsHSK;
 
 /// <summary>
 /// Per-world cooldown tracker for all trade signal buildings.
-/// Each building type uses its own cooldownKey (e.g. "tribal", "medieval").
+/// Stores both the tick when the signal was used and the cooldown duration,
+/// so the building that triggered the signal determines the cooldown length.
 /// </summary>
 public class WorldComponent_TradeSignalCooldown : WorldComponent
 {
 	private Dictionary<string, int> lastSignalTicks = new Dictionary<string, int>();
+	private Dictionary<string, int> cooldownDurations = new Dictionary<string, int>();
 
 	public WorldComponent_TradeSignalCooldown(World world) : base(world)
 	{
@@ -20,10 +22,12 @@ public class WorldComponent_TradeSignalCooldown : WorldComponent
 	{
 		base.ExposeData();
 		Scribe_Collections.Look(ref lastSignalTicks, "lastSignalTicks", LookMode.Value, LookMode.Value);
+		Scribe_Collections.Look(ref cooldownDurations, "cooldownDurations", LookMode.Value, LookMode.Value);
 		lastSignalTicks ??= new Dictionary<string, int>();
+		cooldownDurations ??= new Dictionary<string, int>();
 	}
 
-	public bool CooldownComplete(string key, int cooldownTicks, out int ticksLeft)
+	public bool CooldownComplete(string key, out int ticksLeft)
 	{
 		ticksLeft = 0;
 		if (!lastSignalTicks.TryGetValue(key, out int lastTick) || lastTick < 0)
@@ -31,18 +35,24 @@ public class WorldComponent_TradeSignalCooldown : WorldComponent
 			return true;
 		}
 
-		int elapsed = Find.TickManager.TicksGame - lastTick;
-		if (elapsed >= cooldownTicks)
+		if (!cooldownDurations.TryGetValue(key, out int duration))
 		{
 			return true;
 		}
 
-		ticksLeft = cooldownTicks - elapsed;
+		int elapsed = Find.TickManager.TicksGame - lastTick;
+		if (elapsed >= duration)
+		{
+			return true;
+		}
+
+		ticksLeft = duration - elapsed;
 		return false;
 	}
 
-	public void NotifySignalUsed(string key)
+	public void NotifySignalUsed(string key, int cooldownTicks)
 	{
 		lastSignalTicks[key] = Find.TickManager.TicksGame;
+		cooldownDurations[key] = cooldownTicks;
 	}
 }

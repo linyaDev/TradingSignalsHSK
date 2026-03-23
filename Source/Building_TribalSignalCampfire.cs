@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace TribalSignalCampfire;
+namespace TradingSignalsHSK;
 
 public class Building_TribalSignalCampfire : Building
 {

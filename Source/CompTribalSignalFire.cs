@@ -4,7 +4,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace TribalSignalCampfire;
+namespace TradingSignalsHSK;
 
 public class CompProperties_TribalSignalFire : CompProperties
 {
@@ -192,7 +192,7 @@ public class CompTribalSignalFire : ThingComp
 		IncidentDef? incident = DefDatabase<IncidentDef>.GetNamedSilentFail("TraderCaravanArrival");
 		if (incident == null)
 		{
-			Log.Error("TribalSignalCampfire: TraderCaravanArrival incident not found.");
+			Log.Error("TradingSignalsHSK: TraderCaravanArrival incident not found.");
 			return;
 		}
 

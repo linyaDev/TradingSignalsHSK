@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<ThingDef ParentName="BuildingBase">
-		<defName>TribalSignalCampfire</defName>
+		<defName>TradingSignalsHSK</defName>
 		<label>tribal signal fire</label>
 		<description>A large signal fire. Light it to raise a smoke column visible to nearby tribal allies — a trading caravan from a Neolithic faction may answer. Only tribes (Neolithic tech) respond; outlanders and industrial factions ignore the signal. Cooldown is shared: any signal fire triggers the same timer for all of them.</description>
-		<thingClass>TribalSignalCampfire.Building_TribalSignalCampfire</thingClass>
+		<thingClass>TradingSignalsHSK.Building_TradingSignalsHSK</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Misc/Campfire</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -14,7 +14,7 @@
 				<rect>(0.2,0,0.6,0.1)</rect>
 			</damageData>
 		</graphicData>
-		<uiIconPath>TribalSignalCampfire/SignalFire</uiIconPath>
+		<uiIconPath>TradingSignalsHSK/SignalFire</uiIconPath>
 		<useHitPoints>false</useHitPoints>
 		<statBases>
 			<WorkToBuild>350</WorkToBuild>
@@ -39,7 +39,7 @@
 				<glowRadius>8</glowRadius>
 				<glowColor>(252,187,113,0)</glowColor>
 			</li>
-			<li Class="TribalSignalCampfire.CompProperties_TribalSignalFire">
+			<li Class="TradingSignalsHSK.CompProperties_TribalSignalFire">
 				<cooldownTicks>900000</cooldownTicks>
 			</li>
 		</comps>

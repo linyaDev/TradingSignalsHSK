@@ -1,7 +1,7 @@
 using RimWorld.Planet;
 using Verse;
 
-namespace TribalSignalCampfire;
+namespace TradingSignalsHSK;
 
 /// <summary>
 /// Single per-world cooldown for all tribal signal fires.

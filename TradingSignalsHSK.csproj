@@ -3,8 +3,8 @@
     <TargetFramework>net48</TargetFramework>
     <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
-    <AssemblyName>TribalSignalCampfire</AssemblyName>
-    <RootNamespace>TribalSignalCampfire</RootNamespace>
+    <AssemblyName>TradingSignalsHSK</AssemblyName>
+    <RootNamespace>TradingSignalsHSK</RootNamespace>
     <Version>1.0.8</Version>
     <AssemblyVersion>1.0.8.0</AssemblyVersion>
     <FileVersion>1.0.8.0</FileVersion>

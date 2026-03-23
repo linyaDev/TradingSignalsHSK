@@ -89,7 +89,7 @@
 		<tickerType>Normal</tickerType>
 		<costList>
 			<WoodLog>70</WoodLog>
-			<ComponentPrimitive>4</ComponentPrimitive>
+			<ComponentMedieval>4</ComponentMedieval>
 		</costList>
 		<comps>
 			<li Class="TradingSignalsHSK.CompProperties_TradeSignal">

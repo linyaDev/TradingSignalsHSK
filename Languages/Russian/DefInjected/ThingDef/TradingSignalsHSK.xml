@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<TradingSignalsHSK.label>сигнальный костёр</TradingSignalsHSK.label>
-	<TradingSignalsHSK.description>Большой сигнальный костёр. Дым виден племенам — может прийти торговый караван случайной неолитовой (Neolithic) фракции. Аутлендеры и высокотехнологичные фракции сигнал игнорируют. Перезарядка общая: любой костёр запускает один таймер на все.</TradingSignalsHSK.description>
+	<TribalSignalCampfire.label>сигнальный костёр</TribalSignalCampfire.label>
+	<TribalSignalCampfire.description>Большой сигнальный костёр. Подожгите его, чтобы поднять дымовой столб — торговый караван случайной неолитовой фракции может откликнуться. Костёр горит до прихода каравана, после чего сгорает. При активации списывается 200 серебра.</TribalSignalCampfire.description>
+	<MedievalDovecote.label>голубятня</MedievalDovecote.label>
+	<MedievalDovecote.description>Небольшая голубятня. Отправьте почтового голубя, чтобы вызвать торговый караван средневековой фракции. Голубятня многоразовая — после прибытия каравана её можно использовать снова после перезарядки. При активации списывается 200 серебра.</MedievalDovecote.description>
 </LanguageData>

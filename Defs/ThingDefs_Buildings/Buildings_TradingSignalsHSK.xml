@@ -65,8 +65,9 @@
 		<description>A small pigeon house. Send a carrier pigeon to request a trader caravan from a Medieval faction. The dovecote is reusable — after the caravan arrives it can be used again after a cooldown. Costs 200 silver on activation.</description>
 		<thingClass>TradingSignalsHSK.Building_TradingSignalsHSK</thingClass>
 		<graphicData>
-			<texPath>Things/Building/Misc/Campfire</texPath>
+			<texPath>TradingSignalsHSK/Dovecote</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
 			<drawRotated>false</drawRotated>
 			<allowFlip>false</allowFlip>
 		</graphicData>
@@ -78,8 +79,8 @@
 			<Flammability>0.5</Flammability>
 			<Beauty>1</Beauty>
 		</statBases>
-		<size>(1,1)</size>
-		<passability>PassThroughOnly</passability>
+		<size>(2,2)</size>
+		<passability>Impassable</passability>
 		<pathCost>42</pathCost>
 		<fillPercent>0.25</fillPercent>
 		<canOverlapZones>false</canOverlapZones>

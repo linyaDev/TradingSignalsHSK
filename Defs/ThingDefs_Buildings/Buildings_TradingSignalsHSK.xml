@@ -70,6 +70,7 @@
 			<drawRotated>false</drawRotated>
 			<allowFlip>false</allowFlip>
 		</graphicData>
+		<uiIconPath>TradingSignalsHSK/Dovecote</uiIconPath>
 		<useHitPoints>true</useHitPoints>
 		<statBases>
 			<WorkToBuild>800</WorkToBuild>

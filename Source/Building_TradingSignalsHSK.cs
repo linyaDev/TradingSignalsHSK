@@ -3,12 +3,12 @@ using Verse;
 
 namespace TradingSignalsHSK;
 
-public class Building_TribalSignalCampfire : Building
+public class Building_TradingSignalsHSK : Building
 {
 	public override AcceptanceReport DeconstructibleBy(Faction faction)
 	{
-		var comp = GetComp<CompTribalSignalFire>();
-		if (comp != null && comp.IsBurning)
+		var comp = GetComp<CompTradeSignal>();
+		if (comp != null && comp.IsActive)
 		{
 			return AcceptanceReport.WasRejected;
 		}

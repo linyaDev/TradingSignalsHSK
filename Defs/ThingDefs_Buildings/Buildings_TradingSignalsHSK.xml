@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+	<!-- Tribal signal campfire: calls Neolithic caravans, burns and is destroyed on arrival -->
 	<ThingDef ParentName="BuildingBase">
-		<defName>TradingSignalsHSK</defName>
+		<defName>TribalSignalCampfire</defName>
 		<label>tribal signal fire</label>
-		<description>A large signal fire. Light it to raise a smoke column visible to nearby tribal allies — a trading caravan from a Neolithic faction may answer. Only tribes (Neolithic tech) respond; outlanders and industrial factions ignore the signal. Cooldown is shared: any signal fire triggers the same timer for all of them.</description>
+		<description>A large signal fire. Light it to raise a smoke column visible to nearby tribal allies — a trading caravan from a Neolithic faction may answer. The fire burns until the caravan arrives, then the campfire is consumed. Costs 200 silver on activation.</description>
 		<thingClass>TradingSignalsHSK.Building_TradingSignalsHSK</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Misc/Campfire</texPath>
@@ -39,8 +40,71 @@
 				<glowRadius>8</glowRadius>
 				<glowColor>(252,187,113,0)</glowColor>
 			</li>
-			<li Class="TradingSignalsHSK.CompProperties_TribalSignalFire">
+			<li Class="TradingSignalsHSK.CompProperties_TradeSignal">
 				<cooldownTicks>900000</cooldownTicks>
+				<silverCost>200</silverCost>
+				<arrivalDelayTicks>120000</arrivalDelayTicks>
+				<targetTechLevel>Neolithic</targetTechLevel>
+				<destroyOnUse>true</destroyOnUse>
+				<cooldownKey>tribal</cooldownKey>
+				<commandLabelKey>TribalSignal_CommandLabel</commandLabelKey>
+				<commandDescKey>TribalSignal_CommandDesc</commandDescKey>
+				<scheduledKey>TribalSignal_Scheduled</scheduledKey>
+				<noFactionKey>TribalSignal_NoFaction</noFactionKey>
+				<activeKey>TribalSignal_Burning</activeKey>
+				<doneKey>TribalSignal_BurnedOut</doneKey>
+			</li>
+		</comps>
+		<designationCategory>Misc</designationCategory>
+	</ThingDef>
+
+	<!-- Medieval dovecote: calls Medieval caravans, reusable -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>MedievalDovecote</defName>
+		<label>dovecote</label>
+		<description>A small pigeon house. Send a carrier pigeon to request a trader caravan from a Medieval faction. The dovecote is reusable — after the caravan arrives it can be used again after a cooldown. Costs 200 silver on activation.</description>
+		<thingClass>TradingSignalsHSK.Building_TradingSignalsHSK</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Misc/Campfire</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<allowFlip>false</allowFlip>
+		</graphicData>
+		<useHitPoints>true</useHitPoints>
+		<statBases>
+			<WorkToBuild>800</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>0.5</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<passability>PassThroughOnly</passability>
+		<pathCost>42</pathCost>
+		<fillPercent>0.25</fillPercent>
+		<canOverlapZones>false</canOverlapZones>
+		<constructEffect>ConstructWood</constructEffect>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<tickerType>Normal</tickerType>
+		<costList>
+			<WoodLog>70</WoodLog>
+			<ComponentPrimitive>4</ComponentPrimitive>
+		</costList>
+		<comps>
+			<li Class="TradingSignalsHSK.CompProperties_TradeSignal">
+				<cooldownTicks>900000</cooldownTicks>
+				<silverCost>200</silverCost>
+				<arrivalDelayTicks>120000</arrivalDelayTicks>
+				<targetTechLevel>Medieval</targetTechLevel>
+				<destroyOnUse>false</destroyOnUse>
+				<cooldownKey>medieval</cooldownKey>
+				<commandLabelKey>MedievalSignal_CommandLabel</commandLabelKey>
+				<commandDescKey>MedievalSignal_CommandDesc</commandDescKey>
+				<scheduledKey>MedievalSignal_Scheduled</scheduledKey>
+				<noFactionKey>MedievalSignal_NoFaction</noFactionKey>
+				<activeKey>MedievalSignal_Active</activeKey>
+				<doneKey>MedievalSignal_Done</doneKey>
 			</li>
 		</comps>
 		<designationCategory>Misc</designationCategory>

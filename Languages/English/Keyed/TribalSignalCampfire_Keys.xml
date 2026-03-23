@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+	<!-- Shared keys -->
+	<TradeSignal_OnCooldown>Cooldown: {0}</TradeSignal_OnCooldown>
+	<TradeSignal_ConfirmPayment>Calling a caravan requires paying {0} silver to the caravaneer upon arrival. Set aside this amount now?</TradeSignal_ConfirmPayment>
+	<TradeSignal_NotEnoughSilver>Not enough silver. Need {0}, have {1}.</TradeSignal_NotEnoughSilver>
+	<TradeSignal_CooldownShared>Cooldown is shared: all buildings of this type use the same timer.</TradeSignal_CooldownShared>
+
+	<!-- Tribal signal fire -->
 	<TribalSignal_CommandLabel>Call tribal traders</TribalSignal_CommandLabel>
 	<TribalSignal_CommandDesc>Raise a smoke signal. A random non-hostile Neolithic faction that can send trade caravans will be notified; the caravan arrives after a delay (not instantly). Requires {0} silver. Cooldown applies after calling.</TribalSignal_CommandDesc>
-	<TribalSignal_OnCooldown>Cooldown: {0}</TribalSignal_OnCooldown>
+	<TribalSignal_Scheduled>Smoke signal sent to {0}. A trader caravan should arrive in about {1} days.</TribalSignal_Scheduled>
 	<TribalSignal_NoFaction>No suitable tribal faction is available (Neolithic, non-hostile, can trade, temperature OK).</TribalSignal_NoFaction>
 	<TribalSignal_Burning>Signal fire burning. Caravan arriving in {0}.</TribalSignal_Burning>
 	<TribalSignal_BurnedOut>The signal fire has burned out.</TribalSignal_BurnedOut>
-	<TribalSignal_ConfirmPayment>Calling a caravan requires paying {0} silver to the caravaneer upon arrival. Set aside this amount now?</TribalSignal_ConfirmPayment>
-	<TribalSignal_NotEnoughSilver>Not enough silver. Need {0}, have {1}.</TribalSignal_NotEnoughSilver>
 	<TribalSignal_Failed>The signal failed — no caravan arrived (blocked conditions or RNG).</TribalSignal_Failed>
-	<TribalSignal_Scheduled>Smoke signal sent to {0}. A trader caravan should arrive in about {1} days.</TribalSignal_Scheduled>
-	<TribalSignal_CooldownShared>Cooldown is shared: all signal fires use the same timer.</TribalSignal_CooldownShared>
+
+	<!-- Medieval dovecote -->
+	<MedievalSignal_CommandLabel>Send carrier pigeon</MedievalSignal_CommandLabel>
+	<MedievalSignal_CommandDesc>Send a carrier pigeon to a Medieval faction. A random non-hostile Medieval faction that can send trade caravans will be notified; the caravan arrives after a delay. Requires {0} silver. Cooldown applies after sending.</MedievalSignal_CommandDesc>
+	<MedievalSignal_Scheduled>Carrier pigeon sent to {0}. A trader caravan should arrive in about {1} days.</MedievalSignal_Scheduled>
+	<MedievalSignal_NoFaction>No suitable medieval faction is available (Medieval, non-hostile, can trade, temperature OK).</MedievalSignal_NoFaction>
+	<MedievalSignal_Active>Pigeon in flight. Caravan arriving in {0}.</MedievalSignal_Active>
+	<MedievalSignal_Done>The carrier pigeon has returned.</MedievalSignal_Done>
 </LanguageData>

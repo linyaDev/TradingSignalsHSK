@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<TribalSignal_CommandLabel>Позвать племенных торговцев</TribalSignal_CommandLabel>
+	<TribalSignal_CommandDesc>Поднять дымовой сигнал. Случайная не враждебная неолитовая фракция с караванами получит зов; караван придёт не сразу, а через некоторое время. После вызова действует перезарядка.</TribalSignal_CommandDesc>
+	<TribalSignal_OnCooldown>Перезарядка: {0}</TribalSignal_OnCooldown>
+	<TribalSignal_NoFaction>Нет подходящей племенной фракции (Neolithic, не враг, есть торговцы, температура).</TribalSignal_NoFaction>
+	<TribalSignal_Failed>Сигнал не сработал — караван не прибыл (условия или случайность).</TribalSignal_Failed>
+	<TribalSignal_Scheduled>Сигнал отправлен фракции «{0}». Торговый караван ожидается примерно через {1} дн.</TribalSignal_Scheduled>
+	<TribalSignal_CooldownShared>Общая перезарядка: все сигнальные костры разделяют один таймер.</TribalSignal_CooldownShared>
+</LanguageData>

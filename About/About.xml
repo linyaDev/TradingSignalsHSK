@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Tribal signal campfire</name>
+	<author>linyaDev</author>
+	<supportedVersions>
+		<li>1.4</li>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>local.tribal.signalcampfire</packageId>
+	<modVersion>1.0.8</modVersion>
+	<description>Строение «Сигнальный костёр»: подать дымовой сигнал и вызвать торговый караван случайной фракции с tech level Neolithic (племена). Кулдаун общий для всех костров в сохранении (по умолчанию 15 дней). Без зависимостей.
+
+— English —
+
+Building "Tribal signal fire": call a smoke signal to request a trader caravan from a random faction whose tech level is Neolithic (tribal). Cooldown is shared across all signal fires in the save (default 15 days). No dependencies.</description>
+</ModMetaData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<TribalSignal_CommandLabel>Call tribal traders</TribalSignal_CommandLabel>
+	<TribalSignal_CommandDesc>Raise a smoke signal. A random non-hostile Neolithic faction that can send trade caravans will be notified; the caravan arrives after a delay (not instantly). Cooldown applies after calling.</TribalSignal_CommandDesc>
+	<TribalSignal_OnCooldown>Cooldown: {0}</TribalSignal_OnCooldown>
+	<TribalSignal_NoFaction>No suitable tribal faction is available (Neolithic, non-hostile, can trade, temperature OK).</TribalSignal_NoFaction>
+	<TribalSignal_Failed>The signal failed — no caravan arrived (blocked conditions or RNG).</TribalSignal_Failed>
+	<TribalSignal_Scheduled>Smoke signal sent to {0}. A trader caravan should arrive in about {1} days.</TribalSignal_Scheduled>
+	<TribalSignal_CooldownShared>Cooldown is shared: all signal fires use the same timer.</TribalSignal_CooldownShared>
+</LanguageData>

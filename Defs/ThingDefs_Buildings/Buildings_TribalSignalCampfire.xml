@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+		<defName>TribalSignalCampfire</defName>
+		<label>tribal signal fire</label>
+		<description>A large signal fire. Light it to raise a smoke column visible to nearby tribal allies — a trading caravan from a Neolithic faction may answer. Only tribes (Neolithic tech) respond; outlanders and industrial factions ignore the signal. Cooldown is shared: any signal fire triggers the same timer for all of them.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Misc/Campfire</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<allowFlip>false</allowFlip>
+			<damageData>
+				<rect>(0.2,0,0.6,0.1)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Misc/Campfire_MenuIcon</uiIconPath>
+		<statBases>
+			<WorkToBuild>350</WorkToBuild>
+			<MaxHitPoints>140</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>-2</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<passability>PassThroughOnly</passability>
+		<pathCost>42</pathCost>
+		<fillPercent>0.1</fillPercent>
+		<canOverlapZones>false</canOverlapZones>
+		<constructEffect>ConstructDirt</constructEffect>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<costList>
+			<WoodLog>30</WoodLog>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>8</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="TribalSignalCampfire.CompProperties_TribalSignalFire">
+				<cooldownTicks>900000</cooldownTicks>
+			</li>
+		</comps>
+		<designationCategory>Misc</designationCategory>
+	</ThingDef>
+</Defs>

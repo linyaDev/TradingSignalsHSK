@@ -14,7 +14,7 @@
 		</tags>
 	</ResearchProjectDef>
 
-	<ResearchProjectDef ParentName="PrimitiveBase">
+	<ResearchProjectDef ParentName="MedievalBase">
 		<defName>CarrierPigeons</defName>
 		<label>Carrier pigeons</label>
 		<description>Train carrier pigeons and build dovecotes to send messages to medieval factions, requesting trade caravans.</description>

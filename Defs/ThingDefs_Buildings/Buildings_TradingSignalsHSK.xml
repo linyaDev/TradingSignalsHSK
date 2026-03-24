@@ -46,6 +46,7 @@
 				<arrivalDelayTicks>120000</arrivalDelayTicks>
 				<targetTechLevel>Neolithic</targetTechLevel>
 				<destroyOnUse>true</destroyOnUse>
+				<disableAtTechLevel>Industrial</disableAtTechLevel>
 				<cooldownKey>tradeSignal</cooldownKey>
 				<commandLabelKey>TribalSignal_CommandLabel</commandLabelKey>
 				<commandDescKey>TribalSignal_CommandDesc</commandDescKey>
@@ -55,6 +56,9 @@
 				<doneKey>TribalSignal_BurnedOut</doneKey>
 			</li>
 		</comps>
+		<researchPrerequisites>
+			<li>SignalFires</li>
+		</researchPrerequisites>
 		<designationCategory>Misc</designationCategory>
 	</ThingDef>
 
@@ -67,6 +71,7 @@
 		<graphicData>
 			<texPath>TradingSignalsHSK/Dovecote</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
 			<drawRotated>false</drawRotated>
 			<allowFlip>false</allowFlip>
 		</graphicData>
@@ -79,7 +84,7 @@
 			<DeteriorationRate>0</DeteriorationRate>
 			<Beauty>1</Beauty>
 		</statBases>
-		<size>(1,1)</size>
+		<size>(2,2)</size>
 		<passability>PassThroughOnly</passability>
 		<pathCost>42</pathCost>
 		<fillPercent>0.25</fillPercent>
@@ -104,6 +109,7 @@
 				<spawnBirdsOnUse>true</spawnBirdsOnUse>
 				<birdCount>2</birdCount>
 				<birdKindDef>Crow</birdKindDef>
+				<disableAtResearch>Oil_Industry_C1</disableAtResearch>
 				<cooldownKey>tradeSignal</cooldownKey>
 				<commandLabelKey>MedievalSignal_CommandLabel</commandLabelKey>
 				<commandDescKey>MedievalSignal_CommandDesc</commandDescKey>
@@ -113,6 +119,9 @@
 				<doneKey>MedievalSignal_Done</doneKey>
 			</li>
 		</comps>
+		<researchPrerequisites>
+			<li>CarrierPigeons</li>
+		</researchPrerequisites>
 		<designationCategory>Misc</designationCategory>
 	</ThingDef>
 </Defs>

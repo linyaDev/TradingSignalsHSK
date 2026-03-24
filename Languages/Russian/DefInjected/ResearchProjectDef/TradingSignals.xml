@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<SignalFires.label>Сигнальные огни</SignalFires.label>
+	<SignalFires.description>Научиться строить большие сигнальные костры, дым которых виден издалека. Ближайшие племена могут прислать торговый караван в ответ.</SignalFires.description>
+	<CarrierPigeons.label>Почтовые голуби</CarrierPigeons.label>
+	<CarrierPigeons.description>Обучить почтовых голубей и построить голубятни для отправки посланий средневековым фракциям с просьбой прислать торговый караван.</CarrierPigeons.description>
+</LanguageData>

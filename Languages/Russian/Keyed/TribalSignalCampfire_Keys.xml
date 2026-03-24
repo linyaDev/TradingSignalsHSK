@@ -5,6 +5,7 @@
 	<TradeSignal_ConfirmPayment>При вызове каравана придётся дополнительно заплатить караванщику по прибытию {0} серебра. Давайте отложим эту сумму заранее?</TradeSignal_ConfirmPayment>
 	<TradeSignal_NotEnoughSilver>Недостаточно серебра. Нужно {0}, есть {1}.</TradeSignal_NotEnoughSilver>
 	<TradeSignal_CooldownShared>Готов к использованию.</TradeSignal_CooldownShared>
+	<TradeSignal_TooAdvanced>Мы попытались отправить сообщение, но другие племена не поняли нас.</TradeSignal_TooAdvanced>
 
 	<!-- Сигнальный костёр (племенной) -->
 	<TribalSignal_CommandLabel>Позвать племенных торговцев</TribalSignal_CommandLabel>

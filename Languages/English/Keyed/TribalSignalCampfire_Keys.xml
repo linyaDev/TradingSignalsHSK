@@ -5,6 +5,7 @@
 	<TradeSignal_ConfirmPayment>Calling a caravan requires paying {0} silver to the caravaneer upon arrival. Set aside this amount now?</TradeSignal_ConfirmPayment>
 	<TradeSignal_NotEnoughSilver>Not enough silver. Need {0}, have {1}.</TradeSignal_NotEnoughSilver>
 	<TradeSignal_CooldownShared>Ready to use.</TradeSignal_CooldownShared>
+	<TradeSignal_TooAdvanced>We tried to send the signal, but the other tribes couldn't understand us.</TradeSignal_TooAdvanced>
 
 	<!-- Tribal signal fire -->
 	<TribalSignal_CommandLabel>Call tribal traders</TribalSignal_CommandLabel>

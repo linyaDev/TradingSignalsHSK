@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ResearchProjectDef ParentName="PrimitiveBase">
+		<defName>SignalFires</defName>
+		<label>Signal fires</label>
+		<description>Learn to build large signal fires that produce thick smoke columns visible from afar. Nearby tribal factions may send a trade caravan in response.</description>
+		<baseCost>300</baseCost>
+		<techLevel>Neolithic</techLevel>
+		<researchViewX>2.00</researchViewX>
+		<researchViewY>15.00</researchViewY>
+		<tab>Buildings_SK</tab>
+		<tags>
+			<li>TribalStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="PrimitiveBase">
+		<defName>CarrierPigeons</defName>
+		<label>Carrier pigeons</label>
+		<description>Train carrier pigeons and build dovecotes to send messages to medieval factions, requesting trade caravans.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>SignalFires</li>
+		</prerequisites>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>15.00</researchViewY>
+		<tab>Buildings_SK</tab>
+	</ResearchProjectDef>
+</Defs>

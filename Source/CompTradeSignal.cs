@@ -19,6 +19,8 @@ public class CompProperties_TradeSignal : CompProperties
 	public int birdCount = 2;
 	public string birdKindDef = "Crow";
 	public string cooldownKey = "tribal";
+	public TechLevel disableAtTechLevel = TechLevel.Undefined;
+	public string disableAtResearch = "";
 
 	// Localization keys
 	public string commandLabelKey = "TribalSignal_CommandLabel";
@@ -163,6 +165,14 @@ public class CompTradeSignal : ThingComp
 		if (map == null) return;
 		if (!CooldownComplete(out _)) return;
 
+		// Check if building is disabled by tech level or research
+		if (IsDisabledByProgress())
+		{
+			Messages.Message("TradeSignal_TooAdvanced".Translate(), MessageTypeDefOf.RejectInput);
+			Tracker?.NotifySignalUsed(Props.cooldownKey, Props.cooldownTicks);
+			return;
+		}
+
 		List<Faction> candidates = FindValidTradeFactions(map).ToList();
 		if (candidates.Count == 0)
 		{
@@ -279,6 +289,26 @@ public class CompTradeSignal : ThingComp
 			remaining -= take;
 		}
 		return remaining <= 0;
+	}
+
+	private bool IsDisabledByProgress()
+	{
+		if (Props.disableAtTechLevel != TechLevel.Undefined &&
+			Faction.OfPlayer.def.techLevel >= Props.disableAtTechLevel)
+		{
+			return true;
+		}
+
+		if (!Props.disableAtResearch.NullOrEmpty())
+		{
+			ResearchProjectDef research = DefDatabase<ResearchProjectDef>.GetNamedSilentFail(Props.disableAtResearch);
+			if (research != null && research.IsFinished)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private bool AnyValidTradeFaction(Map map)
